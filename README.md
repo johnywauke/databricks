@@ -22,12 +22,14 @@ ALTER TABLE gold.api.breweries_case SET TBLPROPERTIES ('delta.autoOptimize.optim
 I added alerts to the Databricks job in case of errors, along with two additional retry attempts in case of failure, with a 5-minute interval, in case the API experiences any error.
 
 <h3> Evidence databricks table: </h3>
-![image](https://github.com/user-attachments/assets/bfe7d0f0-4ef8-4299-8fbd-ff0fc0366a91)
+![image](https://github.com/user-attachments/assets/266ab0b9-2001-402a-b2f8-2577c10886e9)
+
 
 <h3> Evidence databricks job:  </h3>
-![image](https://github.com/user-attachments/assets/cc33b030-68dc-46c4-87c1-140f74e639bf)
+![Captura de tela 2024-11-11 023241](https://github.com/user-attachments/assets/0dae19fb-b7b2-447a-81eb-4642756168a9)
 
 <h3>  Evidence airflow: </h3>
-![image](https://github.com/user-attachments/assets/94f33300-4402-4629-8124-8fa1de82b69b)
+![Captura de tela 2024-11-11 024246](https://github.com/user-attachments/assets/a22c1000-205c-41e6-a17e-dbad48d248a7)
+
 
 
