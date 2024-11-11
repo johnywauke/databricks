@@ -1,25 +1,55 @@
-<h1>TEST: BEES Data Engineering – Breweries Case</h1>
+<h1> Databricks Airflow Pipeline - Modelo Medallion </h1></br>
+Este projeto documenta um pipeline de dados orquestrado com Airflow, utilizando o Databricks como plataforma para transformação de dados no modelo medallion (Bronze, Silver, Gold).</br>
 
-<h1>Solution:</h1> Airflow > Databricks </br> </br>
-As an orchestrator, I used Airflow to manage the pipeline, which was built as a medallion model in Unity Catalog on Databricks. </br></br>
+<h2> Visão Geral do Projeto </h2>
+O pipeline é responsável por: Johny Wauke</br>
 
-Bronze: In the bronze code, I made the request to the API (since the API doesn't require credentials, I didn't need to create a Secrets). In this layer, I created the table schema with varchar and used append to store the data. </br> </br>
-Silver: The fields were typed, transformation and an incremental load process was created. </br> </br>
-Gold: I created two versions: one with an incremental table for performance and another with a view, as requested in the test. </br> </br>
+Extração de dados de uma API pública.</br>
+Processamento e armazenamento de dados em camadas, seguindo o modelo medallion.</br>
+Otimização de desempenho com clustering e propriedades Delta.</br>
+Configuração de alertas e tentativas em caso de falha.</br>
+<h2> Estrutura das Camadas </h2>
+</br>
+<h4>Bronze: </h4>
 
-<h2>Otimization</h2>
-If you need to optimize the table's performance, you can cluster the table and enable autoOptimize. </br> </br>
+Extrai dados da API e os armazena em sua forma bruta.</br>
+O schema é definido com varchar e o modo de escrita append.</br>
+Como a API não requer autenticação, não foi necessário configurar secrets.</br>
+</br></br>
+<h4>Silver: </h4>
 
-ALTER TABLE bronze.api.breweries_case CLUSTER BY (id ,insertion_at) </br>
-ALTER TABLE silver.api.breweries_case CLUSTER BY (id ,insertion_at) </br>
-ALTER TABLE gold.api.breweries_case CLUSTER BY (id ,insertion_at) </br>
+Realiza tipagem dos campos e transformações necessárias.</br>
+Configura a carga incremental para otimização de performance.</br>
+</br></br>
 
-ALTER TABLE bronze.api.breweries_case SET TBLPROPERTIES ('delta.autoOptimize.optimizeWrite' = 'true'); </br>
-ALTER TABLE silver.api.breweries_case SET TBLPROPERTIES ('delta.autoOptimize.optimizeWrite' = 'true'); </br>
-ALTER TABLE gold.api.breweries_case SET TBLPROPERTIES ('delta.autoOptimize.optimizeWrite' = 'true'); </br>
+<h4>Gold: </h4>
+Criei duas versões: </br>
+Uma tabela incremental para melhor desempenho.</br>
+Uma view conforme solicitado, para visualização dos dados.</br></br>
 
-<h2>Alert / Error </h2>
-I added alerts to the Databricks job in case of errors, along with two additional retry attempts in case of failure, with a 5-minute interval, in case the API experiences any error.
+<h2> Configuração de Otimização </h2> </br>
+Para otimizar as tabelas, utilizamos clustering e habilitamos a propriedade de auto-otimização nas tabelas Delta.</br>
+
+<h3> -- Clustering </h3></br>
+ALTER TABLE bronze.api.breweries_case CLUSTER BY (id, insertion_at);</br>
+ALTER TABLE silver.api.breweries_case CLUSTER BY (id, insertion_at);</br>
+ALTER TABLE gold.api.breweries_case CLUSTER BY (id, insertion_at);</br>
+
+<h3> -- Auto-otimização </h3></br>
+ALTER TABLE bronze.api.breweries_case SET TBLPROPERTIES ('delta.autoOptimize.optimizeWrite' = 'true');</br>
+ALTER TABLE silver.api.breweries_case SET TBLPROPERTIES ('delta.autoOptimize.optimizeWrite' = 'true');</br>
+ALTER TABLE gold.api.breweries_case SET TBLPROPERTIES ('delta.autoOptimize.optimizeWrite' = 'true');</br>
+
+<h2> Alertas e Tratamento de Erros </h2></br>
+O job no Databricks possui alertas configurados para informar em caso de erros.</br>
+Foram configuradas duas tentativas adicionais em caso de falha, com um intervalo de 5 minutos entre as execuções, para evitar falhas devido a problemas temporários da API.</br>
+
+<h2> Execução do Pipeline </h2></br>
+Airflow: Utilize o Airflow para iniciar e monitorar o pipeline.</br>
+Databricks: Acompanhe a execução dos jobs e o status das tabelas no Unity Catalog.</br>
+
+<h2> Evidências </h2></br>
+Inclua capturas de tela ou exemplos de registros das tabelas Bronze, Silver e Gold no Databricks para referência e validação.</br>
 
 <h3> Evidence databricks table: </h3>
 
