@@ -23,16 +23,16 @@ I added alerts to the Databricks job in case of errors, along with two additiona
 
 </br>
 <h3> Evidence databricks table: </h3>
-![Captura de tela 2024-11-11 015914](https://github.com/user-attachments/assets/c11e7e50-c302-41af-b980-89d737f6c5ae)
+![image](https://github.com/user-attachments/assets/c11e7e50-c302-41af-b980-89d737f6c5ae)
 
 </br>
 <h3> Evidence databricks job:  </h3>
-![Captura de tela 2024-11-11 023241](https://github.com/user-attachments/assets/2ac8990e-ab81-4e91-814c-db807b38a4dc)
+![image](https://github.com/user-attachments/assets/2ac8990e-ab81-4e91-814c-db807b38a4dc)
 
 
 </br>
 <h3>  Evidence airflow: </h3>
-![Captura de tela 2024-11-11 024246](https://github.com/user-attachments/assets/b9040cc0-8b9c-4e6c-82e3-09ab8adf6e42)
+![image](https://github.com/user-attachments/assets/b9040cc0-8b9c-4e6c-82e3-09ab8adf6e42)
 
 
 
