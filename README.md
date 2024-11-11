@@ -51,6 +51,21 @@ Two additional retries are configured in case of failure, with a 5-minute interv
 Airflow: Use Airflow to trigger and monitor the pipeline.</br>
 Databricks: Monitor job execution and table status in the Unity Catalog.</br>
 
+<h2> Evidence </h2></br>
+Include screenshots or sample records from Bronze, Silver, and Gold tables in Databricks for reference and validation.</br>
+
+<h3> Evidence databricks table: </h3>
+
+![ev01](https://github.com/user-attachments/assets/5b8f8411-f90e-4460-9858-e7221bf4326d)
+
+<h3> Evidence databricks job:  </h3>
+
+![ev02](https://github.com/user-attachments/assets/30b5e18b-b43e-4434-881d-d50495e689b6)
+
+<h3>  Evidence airflow: </h3>
+
+![ev03](https://github.com/user-attachments/assets/692bb3d8-cb55-433e-acb8-8f798c638d22)
+
 <h1>PT:</h1>
 
 <h1> Databricks Airflow Pipeline - Modelo Medallion </h1></br>
