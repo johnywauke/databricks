@@ -1,3 +1,58 @@
+<h1>EN:</h1>
+
+<h1> Databricks Airflow Pipeline - Medallion Model </h1></br>
+This project documents a data pipeline orchestrated with Airflow, using Databricks as the platform for data transformation within the Medallion model (Bronze, Silver, Gold).</br>
+
+<h2> Project Overview </h2>
+The pipeline is managed by: Johny Wauke</br>
+
+Data extraction from a public API.</br>
+Data processing and storage in layered structures following the Medallion model.</br>
+Performance optimization using clustering and Delta properties.</br>
+Configuration of alerts and retries in case of failure.</br>
+
+<h2> Layer Structure </h2>
+</br>
+<h4>Bronze: </h4>
+
+Extracts data from the API and stores it in its raw form.</br>
+The schema is defined with varchar, and the write mode is append.</br>
+Since the API does not require authentication, no secrets were configured.</br>
+</br></br>
+<h4>Silver: </h4>
+
+Implements field typing and necessary transformations.</br>
+Configures incremental loading for performance optimization.</br>
+</br></br>
+
+<h4>Gold: </h4>
+Two versions were created: </br>
+An incremental table for better performance.</br>
+A view as requested, for data visualization purposes.</br></br>
+
+<h2> Optimization Configuration </h2> </br>
+To optimize the tables, clustering was used and auto-optimization was enabled on Delta tables.</br>
+
+<h3> -- Clustering </h3></br>
+ALTER TABLE bronze.api.breweries_case CLUSTER BY (id, insertion_at);</br>
+ALTER TABLE silver.api.breweries_case CLUSTER BY (id, insertion_at);</br>
+ALTER TABLE gold.api.breweries_case CLUSTER BY (id, insertion_at);</br>
+
+<h3> -- Auto-optimization </h3></br>
+ALTER TABLE bronze.api.breweries_case SET TBLPROPERTIES ('delta.autoOptimize.optimizeWrite' = 'true');</br>
+ALTER TABLE silver.api.breweries_case SET TBLPROPERTIES ('delta.autoOptimize.optimizeWrite' = 'true');</br>
+ALTER TABLE gold.api.breweries_case SET TBLPROPERTIES ('delta.autoOptimize.optimizeWrite' = 'true');</br>
+
+<h2> Alerts and Error Handling </h2></br>
+The Databricks job is configured with alerts to notify in case of errors.</br>
+Two additional retries are configured in case of failure, with a 5-minute interval between executions to avoid failures due to temporary API issues.</br>
+
+<h2> Pipeline Execution </h2></br>
+Airflow: Use Airflow to trigger and monitor the pipeline.</br>
+Databricks: Monitor job execution and table status in the Unity Catalog.</br>
+
+<h1>PT:</h1>
+
 <h1> Databricks Airflow Pipeline - Modelo Medallion </h1></br>
 Este projeto documenta um pipeline de dados orquestrado com Airflow, utilizando o Databricks como plataforma para transformação de dados no modelo medallion (Bronze, Silver, Gold).</br>
 
